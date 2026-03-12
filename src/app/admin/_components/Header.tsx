@@ -56,7 +56,7 @@ export default function Header({ user }: HeaderProps) {
                 </button>
 
                 {showPageTitle && (
-                    <h1 className={styles.pageTitle} style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", margin: 0, marginRight: "1rem" }}>
+                    <h1 className={styles.pageTitle} style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", margin: 0, marginRight: "0.25rem" }}>
                         {pageTitle}
                     </h1>
                 )}

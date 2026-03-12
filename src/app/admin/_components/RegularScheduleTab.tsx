@@ -134,7 +134,7 @@ export default function RegularScheduleTab({
                                     <button 
                                         type="button"
                                         className={css.toggle} 
-                                        data-active={isActive}
+                                        data-active={isActive ? "true" : "false"}
                                         onClick={() => toggleDay(day.value)}
                                         aria-label={isActive ? "Isključi" : "Uključi"}
                                     >
@@ -143,51 +143,49 @@ export default function RegularScheduleTab({
                                     <span className={css.dayName}>{day.label}</span>
                                 </div>
                                 
-                                <div className={css.periodsAndAdd}>
-                                    <div className={`${css.periods} ${!isActive ? css.disabled : ""}`}>
-                                        {periods.map((p, idx) => (
-                                            <div key={idx} className={css.periodRow}>
-                                                <select 
-                                                    className={css.timeSelect}
-                                                    value={p.startTime}
-                                                    onChange={(e) => updatePeriod(day.value, idx, "startTime", e.target.value)}
-                                                    disabled={!isActive}
-                                                >
-                                                    {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
-                                                </select>
-                                                <span className={css.periodDash}>-</span>
-                                                <select 
-                                                    className={css.timeSelect}
-                                                    value={p.endTime}
-                                                    onChange={(e) => updatePeriod(day.value, idx, "endTime", e.target.value)}
-                                                    disabled={!isActive}
-                                                >
-                                                    {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
-                                                </select>
-                                                <div className={css.actionSlot}>
-                                                    <button 
-                                                        type="button"
-                                                        className={css.removePeriodBtn}
-                                                        onClick={() => removePeriod(day.value, idx)}
-                                                        disabled={!isActive}
-                                                        title="Ukloni smenu"
+                                {isActive && (
+                                    <div className={css.periodsAndAdd}>
+                                        <div className={css.periods}>
+                                            {periods.map((p, idx) => (
+                                                <div key={idx} className={css.periodRow}>
+                                                    <select 
+                                                        className={css.timeSelect}
+                                                        value={p.startTime}
+                                                        onChange={(e) => updatePeriod(day.value, idx, "startTime", e.target.value)}
                                                     >
-                                                        <Trash2 size={18} />
-                                                    </button>
+                                                        {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
+                                                    </select>
+                                                    <span className={css.periodDash}>-</span>
+                                                    <select 
+                                                        className={css.timeSelect}
+                                                        value={p.endTime}
+                                                        onChange={(e) => updatePeriod(day.value, idx, "endTime", e.target.value)}
+                                                    >
+                                                        {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
+                                                    </select>
+                                                    <div className={css.actionSlot}>
+                                                        <button 
+                                                            type="button"
+                                                            className={css.removePeriodBtn}
+                                                            onClick={() => removePeriod(day.value, idx)}
+                                                            title="Ukloni smenu"
+                                                        >
+                                                            <Trash2 size={18} />
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
+                                        <button 
+                                            type="button"
+                                            className={css.addPeriodCircleBtn}
+                                            onClick={() => addPeriod(day.value)}
+                                            title="Dodaj smenu"
+                                        >
+                                            <Plus size={20} />
+                                        </button>
                                     </div>
-                                    <button 
-                                        type="button"
-                                        className={css.addPeriodCircleBtn}
-                                        onClick={() => addPeriod(day.value)}
-                                        disabled={!isActive}
-                                        title="Dodaj smenu"
-                                    >
-                                        <Plus size={20} />
-                                    </button>
-                                </div>
+                                )}
                             </div>
                         </div>
                     );
