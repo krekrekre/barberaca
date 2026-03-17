@@ -165,12 +165,31 @@ export default function CalendarView({
 
     useEffect(() => {
         // Auto-refresh the calendar every 15 seconds to catch new bookings/cancellations
+        // Skip refresh when any modal is open to avoid interrupting user editing
+        const isAnyModalOpen =
+            slotForModal !== null ||
+            dayForWorkingHoursModal !== null ||
+            showRegularScheduleModal ||
+            appointmentToCancel !== null ||
+            timeOffToDelete !== null ||
+            showReasonSelector;
+
+        if (isAnyModalOpen) return;
+
         const interval = setInterval(() => {
             router.refresh();
         }, 15000);
 
         return () => clearInterval(interval);
-    }, [router]);
+    }, [
+        router,
+        slotForModal,
+        dayForWorkingHoursModal,
+        showRegularScheduleModal,
+        appointmentToCancel,
+        timeOffToDelete,
+        showReasonSelector,
+    ]);
 
     useEffect(() => {
         const handleToggleSlot = (slotId: string) => {
