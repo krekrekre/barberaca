@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
+import { useEffect, useRef } from "react";
+import Link from "next/link";
 
 const services = [
   {
     title: "Klasično Šišanje",
     desc: "Precizno šišanje prilagođeno obliku vaše glave, završeno brijanjem vrata britvom.",
     img: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80&w=800",
-    price: "Od 1.500 RSD"
+    price: "Od 1.500 RSD",
   },
   {
     title: "Sređivanje Brade",
     desc: "Detaljno oblikovanje koje naglašava strukturu vašeg lica uz tretman premium uljem.",
     img: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=800",
-    price: "Od 1.000 RSD"
+    price: "Od 1.000 RSD",
   },
   {
     title: "Brijanje Vrelim Peškirom",
     desc: "Tradicionalno opuštanje uz toplu penu i hiruršku preciznost prave britve.",
     img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=800",
-    price: "Od 1.200 RSD"
-  }
+    price: "Od 1.200 RSD",
+  },
 ];
 
 export default function Services() {
@@ -35,7 +35,7 @@ export default function Services() {
 
       <div className="services-grid">
         {services.map((svc, i) => (
-          <div key={i} className="service-card" style={{ '--delay': i } as any}>
+          <div key={i} className="service-card" style={{ "--delay": i } as any}>
             <div className="card-image">
               <img src={svc.img} alt={svc.title} />
               <div className="card-number">0{i + 1}</div>
@@ -48,7 +48,12 @@ export default function Services() {
                 <span className="price">{svc.price}</span>
                 <Link href="/book" className="card-link">
                   <span>Rezerviši</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </Link>
@@ -88,19 +93,27 @@ export default function Services() {
           font-size: clamp(2.5rem, 5vw, 4rem);
           margin-bottom: 1.5rem;
           letter-spacing: -0.01em;
-          font-family: 'Playfair Display', serif;
+          font-family: "Playfair Display", serif;
           font-weight: 700;
         }
 
         .divider {
           width: 60px;
           height: 2px;
-          background: linear-gradient(to right, transparent, var(--accent), transparent);
+          background: linear-gradient(
+            to right,
+            transparent,
+            var(--accent),
+            transparent
+          );
         }
 
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(360px, 100%), 1fr)
+          );
           gap: 4rem;
         }
 
@@ -158,7 +171,7 @@ export default function Services() {
           font-weight: 900;
           color: white;
           opacity: 0.1;
-          font-family: 'Playfair Display', serif;
+          font-family: "Playfair Display", serif;
           line-height: 1;
         }
 
@@ -167,7 +180,11 @@ export default function Services() {
           flex-grow: 1;
           display: flex;
           flex-direction: column;
-          background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+          background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(0, 0, 0, 0.2)
+          );
         }
 
         .card-type {
@@ -181,7 +198,7 @@ export default function Services() {
         .card-content h3 {
           font-size: 1.8rem;
           margin-bottom: 1rem;
-          font-family: 'Playfair Display', serif;
+          font-family: "Playfair Display", serif;
           font-weight: 700;
           color: var(--text-primary);
         }
@@ -237,7 +254,7 @@ export default function Services() {
           .services {
             padding: 6rem 5%;
           }
-          
+
           .section-header {
             margin-bottom: 3.5rem;
           }

@@ -1,0 +1,241 @@
+/* Booking shell — same tokens as admin (admin.module.css .card / .sidebar) */
+
+.shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  background: var(--surface);
+  color: var(--text-primary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  position: relative;
+  transition: var(--transition);
+}
+
+.shell h1,
+.shell h2,
+.shell h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.sidebar {
+  padding: 1.75rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.brandRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 6px;
+  margin-bottom: 0.65rem;
+}
+
+.brandName {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.serviceTitle {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  color: var(--text-primary);
+  font-weight: 700;
+  text-align: center;
+}
+
+.metaRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.65rem;
+}
+
+.metaRow svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--text-secondary);
+}
+
+.pricingBlock {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.pricingLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.priceMain {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.extrasList {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.employeeSection {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.employeeLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin: 0;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.employeePills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.employeePill {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface) 100%, transparent) 0%,
+    color-mix(in srgb, var(--bg-color) 35%, var(--surface)) 100%
+  );
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.18s ease;
+  box-shadow: 0 1px 2px color-mix(in srgb, #000 35%, transparent);
+}
+
+.employeePill:hover {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface-hover));
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 14px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.employeePill:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--bg-color),
+    0 0 0 4px var(--accent);
+}
+
+.employeePillActive {
+  background: linear-gradient(
+    165deg,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 75%, #000) 100%
+  );
+  color: var(--bg-color);
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--border-light));
+  box-shadow:
+    0 4px 14px color-mix(in srgb, var(--accent) 35%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 18%, transparent);
+}
+
+.employeePillActive:hover {
+  background: linear-gradient(
+    165deg,
+    var(--accent-hover) 0%,
+    color-mix(in srgb, var(--accent-hover) 70%, #000) 100%
+  );
+  color: var(--bg-color);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 20px color-mix(in srgb, var(--accent) 40%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 22%, transparent);
+}
+
+@media (min-width: 1100px) {
+  .shell {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.95fr) minmax(0, 1.15fr) minmax(
+        0,
+        1fr
+      );
+    grid-template-rows: minmax(0, 1fr);
+    align-items: stretch;
+    min-height: max(520px, calc(100vh - 70px - 3rem));
+    height: 100%;
+  }
+
+  .sidebar {
+    grid-column: 1;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    min-height: 0;
+    align-self: stretch;
+  }
+
+  .brandRow {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .logo {
+    align-self: flex-start;
+  }
+
+  .serviceTitle {
+    text-align: left;
+  }
+}

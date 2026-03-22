@@ -14,8 +14,12 @@
 }
 
 @keyframes overlayIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal {
@@ -55,7 +59,7 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   color: var(--accent);
 }
 
@@ -84,6 +88,23 @@
   padding: 1.5rem;
   overflow-y: auto;
   flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footerSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.authForm {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .infoSection {
@@ -91,12 +112,20 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
 }
 
 .infoItem {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
+  width: 100%;
+}
+
+.infoItem > div:last-child {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
 }
 
 .infoIcon {
@@ -177,6 +206,7 @@
 
 .serviceMain {
   flex: 1;
+  min-width: 0;
 }
 
 .serviceTitle {
@@ -200,9 +230,11 @@
 }
 
 .footer {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
   border-top: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .confirmBtn {
@@ -267,7 +299,7 @@
 }
 
 .successTitle {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 2rem;
   color: var(--text-primary);
   margin-bottom: 1rem;
@@ -296,20 +328,147 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet & desktop — larger modal, summary fields, and actions */
+@media (min-width: 481px) {
+  .modal {
+    max-width: 560px;
+  }
+
+  .header {
+    padding: 1.65rem 1.75rem;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .body {
+    padding: 1.65rem 1.75rem;
+  }
+
+  .infoIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .infoValue {
+    font-size: 1.15rem;
+  }
+
+  .serviceOption {
+    padding: 1.15rem 1.2rem;
+  }
+
+  .serviceTitle {
+    font-size: 1.05rem;
+  }
+
+  .servicePrice {
+    font-size: 1.15rem;
+  }
+
+  .confirmBtn {
+    padding: 1.1rem;
+    font-size: 1.12rem;
+  }
+
+  .footer {
+    padding: 1.35rem 1.75rem 1.6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 620px;
+  }
+
+  .header {
+    padding: 1.75rem 2rem;
+  }
+
+  .title {
+    font-size: 1.45rem;
+  }
+
+  .body {
+    padding: 1.85rem 2rem;
+  }
+
+  .infoIcon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .infoValue {
+    font-size: 1.2rem;
+  }
+
+  .sectionTitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .serviceOption {
+    padding: 1.25rem 1.35rem;
+  }
+
+  .serviceTitle {
+    font-size: 1.08rem;
+  }
+
+  .serviceMeta {
+    font-size: 0.9rem;
+  }
+
+  .servicePrice {
+    font-size: 1.2rem;
+  }
+
+  .confirmBtn {
+    padding: 1.15rem;
+    font-size: 1.15rem;
+  }
+
+  .footer {
+    padding: 1.5rem 2rem 1.75rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .modal {
+    max-width: 640px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .infoValue {
+    font-size: 1.22rem;
+  }
 }
 
 /* Mobile responsive */
 @media (max-width: 480px) {
   .overlay {
-    padding: 1rem;
+    padding: 0.5rem;
     align-items: center;
   }
 
   .modal {
     max-width: 100%;
-    max-height: 90vh;
+    width: 100%;
+    max-height: 92vh;
     border-radius: var(--radius-lg);
   }
 
@@ -322,7 +481,16 @@
   }
 
   .body {
-    padding: 1.25rem;
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  .infoSection {
+    width: 100%;
+  }
+
+  .infoItem {
+    width: 100%;
+    gap: 0.75rem;
   }
 
   .infoIcon {
@@ -332,23 +500,45 @@
 
   .infoValue {
     font-size: 0.95rem;
+    word-break: break-word;
+  }
+
+  .serviceList {
+    width: 100%;
   }
 
   .serviceOption {
     padding: 0.85rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .servicePrice {
     font-size: 1rem;
     margin-left: 0.5rem;
+    flex-shrink: 0;
   }
 
   .footer {
-    padding: 1.25rem;
+    padding: 1rem 1rem 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footerSummary {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .footerSummary > div:last-child {
+    text-align: right;
   }
 
   .confirmBtn {
     font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .successView {
@@ -361,5 +551,12 @@
 
   .successText {
     font-size: 1rem;
+    max-width: none;
+    width: 100%;
+  }
+
+  .successAction {
+    width: 100%;
+    box-sizing: border-box;
   }
 }

@@ -30,4 +30,5 @@ export async function cancelOwnAppointment(id: string) {
 
     revalidateTag("irregularSchedules", "max" as any);
     revalidatePath("/book");
+    revalidatePath("/profile");
 }

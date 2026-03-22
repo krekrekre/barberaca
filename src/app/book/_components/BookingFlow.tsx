@@ -1,10 +1,8 @@
 "use client";
 
-import { useBooking } from "./BookingContext";
 import { Service, User } from "@prisma/client";
 import Step1Time from "./Step1Time";
 import BookingModal from "./BookingModal";
-import { Scissors, Users, Calendar, CheckCircle } from "lucide-react";
 
 export default function BookingFlow({ 
     services, 
@@ -13,7 +11,6 @@ export default function BookingFlow({
     maxBookingAdvanceDays = 30,
     schedules = [],
     irregularSchedules = [],
-    currentUser
 }: { 
     services: Service[]; 
     employees: User[]; 
@@ -21,20 +18,38 @@ export default function BookingFlow({
     maxBookingAdvanceDays?: number;
     schedules?: any[];
     irregularSchedules?: any[];
-    currentUser?: { id?: string; role?: string };
 }) {
-    const { state } = useBooking();
     return (
-        <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "1.5rem clamp(0.5rem, 3vw, 1rem)" }}>
+        <div
+            className="book-flow-outer"
+            style={{
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
+                minHeight: 0,
+                maxWidth: "1400px",
+                width: "100%",
+                margin: "0 auto",
+                padding: "1.5rem clamp(0.5rem, 3vw, 1rem)",
+            }}
+        >
             {/* Unified Flow Content */}
-            <div style={{ animation: "fadeIn 0.3s ease-in-out" }}>
+            <div
+                style={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    minHeight: 0,
+                    animation: "fadeIn 0.3s ease-in-out",
+                }}
+            >
                 <Step1Time 
+                    services={services}
                     employees={employees} 
                     slotDurationMinutes={slotDurationMinutes} 
                     maxBookingAdvanceDays={maxBookingAdvanceDays}
                     schedules={schedules}
                     irregularSchedules={irregularSchedules}
-                    currentUser={currentUser}
                 />
             </div>
 
