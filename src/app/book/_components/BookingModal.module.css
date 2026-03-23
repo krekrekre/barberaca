@@ -78,12 +78,6 @@
   transition: all 0.2s;
 }
 
-.closeBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  transform: rotate(90deg);
-}
-
 .body {
   padding: 1.5rem;
   overflow-y: auto;
@@ -188,11 +182,6 @@
   text-align: left;
 }
 
-.serviceOption:hover:not(.disabled) {
-  border-color: rgba(211, 140, 65, 0.5);
-  background: rgba(211, 140, 65, 0.05);
-}
-
 .serviceOption.selected {
   border-color: var(--accent);
   background: rgba(211, 140, 65, 0.12);
@@ -252,15 +241,28 @@
   letter-spacing: 0.05em;
 }
 
-.confirmBtn:hover:not(:disabled) {
-  background: #e59a4d;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(211, 140, 65, 0.3);
-}
-
 .confirmBtn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .closeBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    transform: rotate(90deg);
+  }
+
+  .serviceOption:hover:not(.disabled) {
+    border-color: rgba(211, 140, 65, 0.5);
+    background: rgba(211, 140, 65, 0.05);
+  }
+
+  .confirmBtn:hover:not(:disabled) {
+    background: #e59a4d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 140, 65, 0.3);
+  }
 }
 
 .error {

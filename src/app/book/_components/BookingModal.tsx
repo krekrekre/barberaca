@@ -12,7 +12,6 @@ import {
   User as UserIcon,
   Calendar,
   Check,
-  PlusCircle,
 } from "lucide-react";
 import styles from "./BookingModal.module.css";
 
@@ -25,7 +24,6 @@ export default function BookingModal({ services }: Props) {
     state,
     setTimeSlot,
     setService,
-    toggleExtra,
     resetBooking,
     bumpAvailabilityRefresh,
   } = useBooking();
@@ -51,27 +49,15 @@ export default function BookingModal({ services }: Props) {
 
   const maxDuration = state.selectedTimeSlot?.maxDuration ?? 0;
 
-  const currentTotalDuration = useMemo(() => {
-    let d = state.selectedService?.duration ?? 0;
-    state.selectedExtras.forEach((extraId) => {
-      const extra = state.selectedService?.extraServices?.find(
-        (e) => e.id === extraId,
-      );
-      if (extra) d += extra.duration;
-    });
-    return d;
-  }, [state.selectedService, state.selectedExtras]);
+  const currentTotalDuration = useMemo(
+    () => state.selectedService?.duration ?? 0,
+    [state.selectedService],
+  );
 
-  const currentTotalPrice = useMemo(() => {
-    let p = state.selectedService?.price ?? 0;
-    state.selectedExtras.forEach((extraId) => {
-      const extra = state.selectedService?.extraServices?.find(
-        (e) => e.id === extraId,
-      );
-      if (extra) p += extra.price;
-    });
-    return p;
-  }, [state.selectedService, state.selectedExtras]);
+  const currentTotalPrice = useMemo(
+    () => state.selectedService?.price ?? 0,
+    [state.selectedService],
+  );
 
   // Auto-select first available service if none selected
   useEffect(() => {
@@ -119,7 +105,6 @@ export default function BookingModal({ services }: Props) {
           employeeId: state.selectedEmployee?.id,
           serviceId: state.selectedService?.id,
           startTime: state.selectedTimeSlot?.time,
-          extraServiceIds: Array.from(state.selectedExtras),
         }),
       });
 
@@ -578,115 +563,6 @@ export default function BookingModal({ services }: Props) {
                   );
                 })}
               </div>
-
-              {state.selectedService &&
-                state.selectedService.extraServices &&
-                state.selectedService.extraServices.length > 0 && (
-                  <>
-                    <h3
-                      className={styles.sectionTitle}
-                      style={{ marginTop: "1.5rem" }}
-                    >
-                      Dodatne usluge
-                    </h3>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.75rem",
-                      }}
-                    >
-                      {state.selectedService.extraServices.map((extra) => {
-                        const isSelected = state.selectedExtras.has(extra.id);
-                        const fitsWithExtra =
-                          currentTotalDuration -
-                            (isSelected ? extra.duration : 0) +
-                            (isSelected ? 0 : extra.duration) <=
-                          maxDuration;
-                        const canToggle = isSelected || fitsWithExtra;
-
-                        return (
-                          <button
-                            key={extra.id}
-                            onClick={() => canToggle && toggleExtra(extra.id)}
-                            disabled={!canToggle}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "space-between",
-                              padding: "0.85rem 1rem",
-                              borderRadius: "12px",
-                              border: isSelected
-                                ? "1px solid var(--accent)"
-                                : "1px solid var(--border)",
-                              background: isSelected
-                                ? "rgba(224, 123, 57, 0.05)"
-                                : "transparent",
-                              cursor: canToggle ? "pointer" : "not-allowed",
-                              opacity: canToggle ? 1 : 0.5,
-                              transition: "all 0.2s",
-                              width: "100%",
-                              textAlign: "left",
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "0.75rem",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  color: isSelected
-                                    ? "var(--accent)"
-                                    : "var(--text-secondary)",
-                                }}
-                              >
-                                {isSelected ? (
-                                  <Check size={20} />
-                                ) : (
-                                  <PlusCircle size={20} />
-                                )}
-                              </div>
-                              <div>
-                                <div
-                                  style={{
-                                    fontWeight: 600,
-                                    color: isSelected
-                                      ? "var(--accent)"
-                                      : "var(--text-primary)",
-                                    fontSize: "0.95rem",
-                                  }}
-                                >
-                                  {extra.title}
-                                </div>
-                                <div
-                                  style={{
-                                    fontSize: "0.8rem",
-                                    color: "var(--text-secondary)",
-                                  }}
-                                >
-                                  +{extra.duration} min
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              style={{
-                                fontWeight: 700,
-                                color: isSelected
-                                  ? "var(--accent)"
-                                  : "var(--text-primary)",
-                              }}
-                            >
-                              +{extra.price.toFixed(0)} RSD
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </>
-                )}
             </div>
 
             <footer className={styles.footer}>

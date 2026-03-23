@@ -1,4 +1,3 @@
-import { updateService } from "../actions";
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,7 +13,6 @@ export default async function EditServicePage({
 
   const service = await prisma.service.findUnique({
     where: { id },
-    include: { extraServices: true },
   });
 
   if (!service) {

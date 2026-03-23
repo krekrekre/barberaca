@@ -184,7 +184,6 @@ export default function BookingDayCalendar({
     <div className="booking-day-calendar">
       <div className="booking-day-layout">
         <div className="booking-day-calendar-panel">
-          <h2 className="booking-day-section-title">Izaberite datum i vreme</h2>
           <div className="booking-day-nav">
             <button
               type="button"

@@ -437,7 +437,7 @@
     color 0.15s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .booking-day-appointments-panel
     .booking-slots-grid
     button.booking-slot-btn:hover {
@@ -529,14 +529,6 @@
   border-top: 1px solid var(--border);
 }
 
-.booking-day-section-title {
-  margin: 0 0 1rem;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-}
-
 .booking-day-nav-btn {
   padding: 0.45rem;
   background: transparent;
@@ -560,20 +552,22 @@
   opacity: 0.35;
 }
 
-.booking-day-nav-btn:not(:disabled):hover {
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface-hover));
-  color: var(--text-primary);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
-}
-
 .booking-day-nav-btn--next:not(:disabled) {
   background: var(--surface-hover);
   color: var(--text-primary);
 }
 
-.booking-day-nav-btn--next:not(:disabled):hover {
-  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .booking-day-nav-btn:not(:disabled):hover {
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface-hover));
+    color: var(--text-primary);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  .booking-day-nav-btn--next:not(:disabled):hover {
+    background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+  }
 }
 
 .booking-day-timezone {
@@ -958,7 +952,7 @@
   }
 }
 
-@media (min-width: 1100px) and (hover: hover) {
+@media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
   .booking-shell
     .booking-day-appointments-panel
     .booking-slots-grid
@@ -1024,7 +1018,9 @@
     min-height: 48px;
     transition: var(--transition);
   }
+}
 
+@media (max-width: 1099px) and (hover: hover) and (pointer: fine) {
   .booking-shell
     .booking-day-appointments-panel
     .booking-slots-grid
@@ -1102,7 +1098,7 @@
     transform 0.18s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .booking-shell
     .booking-day-calendar
     .booking-day-btn.has-slots:not(:disabled):not(.is-selected):hover {

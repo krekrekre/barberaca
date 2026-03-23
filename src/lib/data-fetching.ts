@@ -3,9 +3,8 @@ import prisma from "./prisma";
 
 export const getCachedServices = unstable_cache(
   async () => {
-    return prisma.service.findMany({ 
+    return prisma.service.findMany({
       orderBy: { createdAt: "asc" },
-      include: { extraServices: true }
     });
   },
   ["services"],

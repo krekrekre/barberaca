@@ -11,7 +11,7 @@ import {
   startOfDay,
   startOfMonth,
 } from "date-fns";
-import { ExtraService, Service, User } from "@prisma/client";
+import { Service, User } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { Clock, MapPin } from "lucide-react";
 import BookingDayCalendar, {
@@ -20,8 +20,6 @@ import BookingDayCalendar, {
 import { BRAND_CONFIG } from "@/config/brand";
 import shellStyles from "./booking-shell.module.css";
 import "@/app/admin/kalendar/_components/calendar.css";
-
-type ServiceWithExtras = Service & { extraServices?: ExtraService[] };
 
 function formatYMD(d: Date): string {
   const y = d.getFullYear();
@@ -56,7 +54,7 @@ export default function Step1Time({
   schedules: _schedules = [],
   irregularSchedules: _irregularSchedules = [],
 }: {
-  services?: ServiceWithExtras[];
+  services?: Service[];
   employees: User[];
   slotDurationMinutes?: number;
   maxBookingAdvanceDays?: number;
@@ -304,16 +302,7 @@ export default function Step1Time({
 
           <div className={shellStyles.metaRow}>
             <Clock size={18} strokeWidth={2} aria-hidden />
-            <span>
-              {displayDuration} min
-              {services.length > 1 && (
-                <span
-                  style={{ display: "block", fontSize: "0.8rem", marginTop: 2 }}
-                >
-                  (interval u kalendaru: {slotDurationMinutes} min)
-                </span>
-              )}
-            </span>
+            <span>{displayDuration} min</span>
           </div>
           <div className={shellStyles.metaRow}>
             <MapPin size={18} strokeWidth={2} aria-hidden />
@@ -327,23 +316,6 @@ export default function Step1Time({
                 <p className={shellStyles.priceMain}>
                   {primaryService.price.toFixed(0)} RSD
                 </p>
-                {primaryService.extraServices?.length > 0 && (
-                  <>
-                    <p
-                      className={shellStyles.pricingLabel}
-                      style={{ marginTop: "0.85rem" }}
-                    >
-                      Dodatne usluge
-                    </p>
-                    <ul className={shellStyles.extrasList}>
-                      {primaryService.extraServices.map((ex) => (
-                        <li key={ex.id}>
-                          {ex.title}: {ex.price.toFixed(0)} RSD
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
               </>
             )}
             {services.length > 1 && (

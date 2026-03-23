@@ -3,12 +3,10 @@
 import { useEffect, useState } from 'react';
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const images = ['/hero-1.jpg', '/hero-2.jpg'];
 
   useEffect(() => {
-    setMounted(true);
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 6000);
@@ -24,7 +22,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-container">
-        <div className={`hero-content ${mounted ? 'active' : ''}`}>
+        <div className="hero-content active">
           <div className="badge">Vrhunska Nega</div>
           <h1>Klasičan stil za<br /> <span className="italic">modernog muškarca.</span></h1>
           <p className="hero-subtitle">
@@ -36,7 +34,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className={`hero-image-wrapper ${mounted ? 'active' : ''}`}>
+        <div className="hero-image-wrapper active">
           <div className="image-stack">
             {images.map((src, idx) => (
               <img
@@ -44,6 +42,8 @@ export default function Hero() {
                 src={src}
                 alt={`Hero ${idx + 1}`}
                 className={`hero-image ${currentImage === idx ? 'visible' : ''}`}
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                fetchPriority={idx === 0 ? 'high' : undefined}
               />
             ))}
           </div>

@@ -21,8 +21,7 @@ interface BookingState {
   selectedEmployee: User | null;
   selectedDate: Date | null;
   selectedTimeSlot: TimeSlot | null;
-  selectedService: (Service & { extraServices?: any[] }) | null;
-  selectedExtras: Set<string>; // IDs of selected extras
+  selectedService: Service | null;
 }
 
 interface BookingContextType {
@@ -34,8 +33,7 @@ interface BookingContextType {
   setEmployee: (employee: User | null) => void;
   setDate: (date: Date | null) => void;
   setTimeSlot: (timeSlot: TimeSlot | null) => void;
-  setService: (service: (Service & { extraServices?: any[] }) | null) => void;
-  toggleExtra: (id: string) => void;
+  setService: (service: Service | null) => void;
   resetBooking: () => void;
 }
 
@@ -45,7 +43,6 @@ const initialState: BookingState = {
   selectedDate: null,
   selectedTimeSlot: null,
   selectedService: null,
-  selectedExtras: new Set(),
 };
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -73,22 +70,12 @@ export function BookingProvider({ children }: { children: ReactNode }) {
       ...prev,
       selectedTimeSlot: timeSlot,
       selectedService: null,
-      selectedExtras: new Set(),
     }));
-  const setService = (service: (Service & { extraServices?: any[] }) | null) =>
+  const setService = (service: Service | null) =>
     setState((prev) => ({
       ...prev,
       selectedService: service,
-      selectedExtras: new Set(),
     }));
-
-  const toggleExtra = (id: string) =>
-    setState((prev) => {
-      const next = new Set(prev.selectedExtras);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return { ...prev, selectedExtras: next };
-    });
 
   const resetBooking = () => setState(initialState);
 
@@ -103,7 +90,6 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         setDate,
         setTimeSlot,
         setService,
-        toggleExtra,
         resetBooking,
       }}
     >

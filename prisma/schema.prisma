@@ -32,17 +32,7 @@ model Service {
   price         Float
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
-  appointments  Appointment[]
-  extraServices ExtraService[]
-}
-
-model ExtraService {
-  id        String  @id @default(cuid())
-  title     String
-  duration  Int     @default(0)
-  price     Float   @default(0)
-  serviceId String
-  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  appointments Appointment[]
 }
 
 model Schedule {
@@ -96,9 +86,8 @@ model Appointment {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   employee   User     @relation("EmployeeAppointments", fields: [employeeId], references: [id], onDelete: Cascade)
-  service       Service? @relation(fields: [serviceId], references: [id])
-  extraServices Json?
-  user          User?    @relation("UserAppointments", fields: [userId], references: [id], onDelete: Cascade)
+  service Service? @relation(fields: [serviceId], references: [id])
+  user    User?    @relation("UserAppointments", fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([startTime, endTime])
   @@index([employeeId, startTime])

@@ -1,6 +1,6 @@
 import { BookingProvider } from "./_components/BookingContext";
 import BookingFlow from "./_components/BookingFlow";
-import Link from "next/link";
+import BookHomeLink from "./_components/BookHomeLink";
 import { getCachedServices, getCachedEmployees, getCachedSettings, getCachedSchedules, getCachedIrregularSchedules } from "@/lib/data-fetching";
 import { BRAND_CONFIG } from "@/config/brand";
 
@@ -38,7 +38,15 @@ export default async function BookPage() {
                 }}
             >
                 <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "1rem 1.5rem", display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
-                    <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.85rem" }}>
+                    <BookHomeLink
+                        style={{
+                            textDecoration: "none",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.85rem",
+                            color: "inherit",
+                        }}
+                    >
                         <img
                             src={BRAND_CONFIG.logoPath}
                             alt={BRAND_CONFIG.name}
@@ -59,7 +67,7 @@ export default async function BookPage() {
                         >
                             {BRAND_CONFIG.name} · zakazivanje
                         </h1>
-                    </Link>
+                    </BookHomeLink>
                 </div>
             </header>
 

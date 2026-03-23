@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
+import InitialLoader from "@/components/layout/InitialLoader";
 import { BRAND_CONFIG } from "@/config/brand";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -33,9 +34,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="sr" className={`${jakarta.variable} ${cormorant.variable}`}>
+    <html
+      lang="sr"
+      className={`${jakarta.variable} ${cormorant.variable}`}
+      style={{ backgroundColor: "#080c14" }}
+    >
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <InitialLoader />
+          {children}
+        </Providers>
       </body>
     </html>
   );

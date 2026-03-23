@@ -22,26 +22,12 @@ export async function createService(
   const duration = parseInt(formData.get("duration") as string);
   const price = parseFloat(formData.get("price") as string);
 
-  const extrasCount = parseInt(formData.get("extrasCount") as string || "0");
-  const extraServices = [];
-  for (let i = 0; i < extrasCount; i++) {
-    const title = formData.get(`extraTitle_${i}`) as string;
-    const duration = parseInt(formData.get(`extraDuration_${i}`) as string || "0");
-    const price = parseFloat(formData.get(`extraPrice_${i}`) as string || "0");
-    if (title) {
-      extraServices.push({ title, duration, price });
-    }
-  }
-
   await prisma.service.create({
     data: {
       title,
       description,
       duration,
       price,
-      extraServices: {
-        create: extraServices,
-      },
     },
   });
 
@@ -62,32 +48,15 @@ export async function updateService(
   const duration = parseInt(formData.get("duration") as string);
   const price = parseFloat(formData.get("price") as string);
 
-  const extrasCount = parseInt(formData.get("extrasCount") as string || "0");
-  const extraServices = [];
-  for (let i = 0; i < extrasCount; i++) {
-    const title = formData.get(`extraTitle_${i}`) as string;
-    const duration = parseInt(formData.get(`extraDuration_${i}`) as string || "0");
-    const price = parseFloat(formData.get(`extraPrice_${i}`) as string || "0");
-    if (title) {
-      extraServices.push({ title, duration, price });
-    }
-  }
-
-  await prisma.$transaction([
-    prisma.extraService.deleteMany({ where: { serviceId: id } }),
-    prisma.service.update({
-      where: { id },
-      data: {
-        title,
-        description,
-        duration,
-        price,
-        extraServices: {
-          create: extraServices,
-        },
-      },
-    }),
-  ]);
+  await prisma.service.update({
+    where: { id },
+    data: {
+      title,
+      description,
+      duration,
+      price,
+    },
+  });
 
   (revalidateTag as any)("services");
   revalidatePath("/admin/services");
